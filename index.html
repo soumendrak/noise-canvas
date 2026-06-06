@@ -175,6 +175,10 @@ canvas {
 <option value="gray">Grayscale</option>
 </select>
 </div>
+<div class="ctl-group">
+<label>&nbsp;</label>
+<button id="export-btn" onclick="exportPNG()" title="Export current frame as PNG" style="background:var(--accent);border:none;color:#fff;padding:6px 14px;border-radius:var(--radius-sm);cursor:pointer;font-size:0.75rem;font-weight:600;white-space:nowrap">⬇ Export PNG</button>
+</div>
 </div>
 </div>
 </div>
@@ -347,6 +351,15 @@ canvas.addEventListener('click', () => {
         canvas.style.cursor = 'pointer';
     }
 });
+
+function exportPNG() {
+    const link = document.createElement('a');
+    link.download = 'noise-canvas-' + Date.now() + '.png';
+    link.href = canvas.toDataURL('image/png');
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+}
 
 requestAnimationFrame(render);
 </script>
